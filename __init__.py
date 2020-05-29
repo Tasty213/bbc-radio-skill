@@ -33,7 +33,9 @@ class BbcRadio(MycroftSkill):
     # This is the function that loads and plays RadioOne. It is nearly identical
     # to the other functions bellow prefixed by 'radio', as such it will be the
     # only doccumented one
+    @intent_handler('radio1.bbc.intent')
     def radioOne(self):
+
         # Create a new media instancem usinf the relevant URL as the source
         media = self.instance.media_new(self.urls[0])
 
@@ -43,6 +45,7 @@ class BbcRadio(MycroftSkill):
         # Ensure the player is playing
         self.player.play()
 
+    @intent_handler('radio1X.bbc.intent')
     def radioOneX(self):
         media = self.instance.media_new(self.urls[1])
 
@@ -52,6 +55,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio1X")
 
+    @intent_handler('radio2.bbc.intent')
     def radioTwo(self):
         media = self.instance.media_new(self.urls[2])
 
@@ -61,6 +65,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio2")
 
+    @intent_handler('radio3.bbc.intent')
     def radioThree(self):
         media = self.instance.media_new(self.urls[3])
 
@@ -70,6 +75,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio3")
 
+    @intent_handler('radio4FM.bc.intent')
     def radioFourFM(self):
         media = self.instance.media_new(self.urls[4])
 
@@ -79,6 +85,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4FM")
 
+    @intent_handler('radio4LW.bbc.intent')
     def radioFourLW(self):
         media = self.instance.media_new(self.urls[5])
 
@@ -88,6 +95,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4LW")
 
+    @intent_handler('radio4X.bbc.intent')
     def radioFourX(self):
         media = self.instance.media_new(self.urls[6])
 
@@ -97,6 +105,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4X")
 
+    @intent_handler('radio5Live.bbc.intent')
     def radioFiveLive(self):
         media = self.instance.media_new(self.urls[7])
 
@@ -106,6 +115,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio5Live")
 
+    @intent_handler('radio5LiveSportsExtra.bbc.intent')
     def radioFiveLiveSportsExtra(self):
         media = self.instance.media_new(self.urls[8])
 
@@ -115,6 +125,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio5LiveSportsExtra")
 
+    @intent_handler('radio6Music.bbc.intent')
     def radioSixMusic(self):
         media = self.instance.media_new(self.urls[9])
 
@@ -124,6 +135,7 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio6Music")
 
+    @intent_handler('radioAsianNetwork.bbc.intent')
     def radioAsianNetwork(self):
         media = self.instance.media_new(self.urls[10])
 
