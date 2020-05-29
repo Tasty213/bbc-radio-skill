@@ -29,7 +29,88 @@ class BbcRadio(MycroftSkill):
     def handle_radio_bbc(self, message):
         self.speak_dialog('radio.bbc')
 
+    def radioOne(self):
+        media = self.instance.media_new(self.urls[0])
 
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioOneX(self):
+        media = self.instance.media_new(self.urls[1])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioTwo(self):
+        media = self.instance.media_new(self.urls[2])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioThree(self):
+        media = self.instance.media_new(self.urls[3])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioFourFM(self):
+        media = self.instance.media_new(self.urls[4])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioFourLW(self):
+        media = self.instance.media_new(self.urls[5])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioFourX(self):
+        media = self.instance.media_new(self.urls[6])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioFiveLive(self):
+        media = self.instance.media_new(self.urls[7])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioFiveLiveSportsExtra(self):
+        media = self.instance.media_new(self.urls[8])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioSixMusic(self):
+        media = self.instance.media_new(self.urls[9])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def radioAsianNetwork(self):
+        media = self.instance.media_new(self.urls[10])
+
+        self.player.set_media(media)
+
+        self.player.play()
+
+    def pause(self):
+        self.player.stop()
+
+    def play(self):
+        self.player.play()
 
 
 
