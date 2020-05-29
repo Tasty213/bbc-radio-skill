@@ -25,13 +25,10 @@ class BbcRadio(MycroftSkill):
         # Initialise the Skills library
         MycroftSkill.__init__(self)
 
-    @intent_file_handler('radio.bbc.intent')
-    def handle_radio_bbc(self, message):
-        self.speak_dialog('radio.bbc')
-
     # This is the function that loads and plays RadioOne. It is nearly identical
     # to the other functions bellow prefixed by 'radio', as such it will be the
     # only doccumented one
+    @intent_handler('radio1.intent')
     def radioOne(self):
         # Create a new media instancem usinf the relevant URL as the source
         media = self.instance.media_new(self.urls[0])
@@ -42,6 +39,10 @@ class BbcRadio(MycroftSkill):
         # Ensure the player is playing
         self.player.play()
 
+        # Tell the user that the radio is playing
+        self.speak_dialog("radio1")
+
+    @intent_handler('radio1X.intent')
     def radioOneX(self):
         media = self.instance.media_new(self.urls[1])
 
@@ -49,6 +50,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio1X")
+
+    @intent_handler('radio2.intent')
     def radioTwo(self):
         media = self.instance.media_new(self.urls[2])
 
@@ -56,6 +60,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio2")
+
+    @intent_handler('radio3.intent')
     def radioThree(self):
         media = self.instance.media_new(self.urls[3])
 
@@ -63,6 +70,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio3")
+
+    @intent_handler('radio4FM.intent')
     def radioFourFM(self):
         media = self.instance.media_new(self.urls[4])
 
@@ -70,6 +80,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio4FM")
+
+    @intent_handler('radio4LW.intent')
     def radioFourLW(self):
         media = self.instance.media_new(self.urls[5])
 
@@ -77,6 +90,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio4LW")
+
+    @intent_handler('radio4X.intent')
     def radioFourX(self):
         media = self.instance.media_new(self.urls[6])
 
@@ -84,6 +100,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio4X")
+
+    @intent_handler('radio5Live.intent')
     def radioFiveLive(self):
         media = self.instance.media_new(self.urls[7])
 
@@ -91,6 +110,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio5Live")
+
+    @intent_handler('radio5LiveSportsExtra.intent')
     def radioFiveLiveSportsExtra(self):
         media = self.instance.media_new(self.urls[8])
 
@@ -98,6 +120,9 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio5LiveSportsExtra")
+
+    @intent_handler('radio6Music.intent')
     def radioSixMusic(self):
         media = self.instance.media_new(self.urls[9])
 
@@ -105,12 +130,17 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+        self.speak_dialog("radio6Music")
+
+    @intent_handler('radioAsianNetwork.intent')
     def radioAsianNetwork(self):
         media = self.instance.media_new(self.urls[10])
 
         self.player.set_media(media)
 
         self.player.play()
+
+        self.speak_dialog("radioAsianNetwork")
 
     # this function pauses the player, note that player.pause() did not work,
     # will submit and issue to python-vlc
