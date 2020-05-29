@@ -1,8 +1,13 @@
-from mycroft import MycroftSkill, intent_file_handler
-
+from adapt.intent import IntentBuilder
+from mycroft import MycroftSkill, intent_handler
+from mycroft.skills.context import adds_context, removes_context
+import vlc
+import time
 
 class BbcRadio(MycroftSkill):
     def __init__(self):
+        super().__init__()
+
         # Create a new instance of the VLC player
         self.instance = vlc.Instance()
 
@@ -28,8 +33,6 @@ class BbcRadio(MycroftSkill):
     # This is the function that loads and plays RadioOne. It is nearly identical
     # to the other functions bellow prefixed by 'radio', as such it will be the
     # only doccumented one
-    @intent_handler('radio1.intent')
-    @adds_context('playing')
     def radioOne(self):
         # Create a new media instancem usinf the relevant URL as the source
         media = self.instance.media_new(self.urls[0])
@@ -40,11 +43,6 @@ class BbcRadio(MycroftSkill):
         # Ensure the player is playing
         self.player.play()
 
-        # Tell the user that the radio is playing
-        self.speak_dialog("radio1")
-
-    @intent_handler('radio1X.intent')
-    @adds_context('playing')
     def radioOneX(self):
         media = self.instance.media_new(self.urls[1])
 
@@ -54,8 +52,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio1X")
 
-    @intent_handler('radio2.intent')
-    @adds_context('playing')
     def radioTwo(self):
         media = self.instance.media_new(self.urls[2])
 
@@ -65,8 +61,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio2")
 
-    @intent_handler('radio3.intent')
-    @adds_context('playing')
     def radioThree(self):
         media = self.instance.media_new(self.urls[3])
 
@@ -76,8 +70,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio3")
 
-    @intent_handler('radio4FM.intent')
-    @adds_context('playing')
     def radioFourFM(self):
         media = self.instance.media_new(self.urls[4])
 
@@ -87,8 +79,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4FM")
 
-    @intent_handler('radio4LW.intent')
-    @adds_context('playing')
     def radioFourLW(self):
         media = self.instance.media_new(self.urls[5])
 
@@ -98,8 +88,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4LW")
 
-    @intent_handler('radio4X.intent')
-    @adds_context('playing')
     def radioFourX(self):
         media = self.instance.media_new(self.urls[6])
 
@@ -109,8 +97,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio4X")
 
-    @intent_handler('radio5Live.intent')
-    @adds_context('playing')
     def radioFiveLive(self):
         media = self.instance.media_new(self.urls[7])
 
@@ -120,8 +106,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio5Live")
 
-    @intent_handler('radio5LiveSportsExtra.intent')
-    @adds_context('playing')
     def radioFiveLiveSportsExtra(self):
         media = self.instance.media_new(self.urls[8])
 
@@ -131,8 +115,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio5LiveSportsExtra")
 
-    @intent_handler('radio6Music.intent')
-    @adds_context('playing')
     def radioSixMusic(self):
         media = self.instance.media_new(self.urls[9])
 
@@ -142,8 +124,6 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radio6Music")
 
-    @intent_handler('radioAsianNetwork.intent')
-    @adds_context('playing')
     def radioAsianNetwork(self):
         media = self.instance.media_new(self.urls[10])
 
@@ -153,26 +133,19 @@ class BbcRadio(MycroftSkill):
 
         self.speak_dialog("radioAsianNetwork")
 
-    # this function pauses the player, note that player.pause() did not work,
-    # will submit and issue to python-vlc
-    @intent_handler(IntentBuilder('pause').require("pause")
-                                          .require('playing').build())
-    @adds_context('paused')
-    def pause(self):
+    def converse(self, utterances, lang):
+        if 'pause' in utterances[0]:
+            self.player.stop()
+            return True
+        elif 'play' in utterances:
+            self.player.play()
+        else:
+            return False
+
+    def stop(self):
         self.player.stop()
 
-    # Resume playing the player
-    @intent_handler(IntentBuilder('play').require("play")
-                                          .require('paused')
-                                          .require('playing').build())
-    @removes_context('paused')
-    def play(self):
-        self.player.play()
-
-    # Stop the player from playing before quitting
-    @removes_context('paused')
-    @removes_context('playing')
-    def stop(self):
+    def shutdown(self):
         self.player.stop()
 
 
