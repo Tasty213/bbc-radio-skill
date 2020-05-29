@@ -29,11 +29,17 @@ class BbcRadio(MycroftSkill):
     def handle_radio_bbc(self, message):
         self.speak_dialog('radio.bbc')
 
+    # This is the function that loads and plays RadioOne. It is nearly identical
+    # to the other functions bellow prefixed by 'radio', as such it will be the
+    # only doccumented one
     def radioOne(self):
+        # Create a new media instancem usinf the relevant URL as the source
         media = self.instance.media_new(self.urls[0])
 
+        # Set the new media for the player
         self.player.set_media(media)
 
+        # Ensure the player is playing
         self.player.play()
 
     def radioOneX(self):
@@ -106,12 +112,18 @@ class BbcRadio(MycroftSkill):
 
         self.player.play()
 
+    # this function pauses the player, note that player.pause() did not work,
+    # will submit and issue to python-vlc
     def pause(self):
         self.player.stop()
 
+    # Resume playing the player
     def play(self):
         self.player.play()
 
+    # Stop the player from playing before quitting
+    def stop(self):
+        self.player.stop()
 
 
 def create_skill():
